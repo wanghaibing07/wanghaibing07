@@ -1,12 +1,12 @@
 # 小冰ovo
 
-这里放我做过的 Linux 和 Kubernetes 运维实验、脚本和排障记录。目前在深圳找 Linux / 云平台运维相关岗位。
+这里记录 Linux 与 Kubernetes 的自动化部署、故障排查和可靠性验证。目前在深圳找 Linux / 云平台运维相关岗位。
 
 ## Retail Reliability Lab
 
 [项目仓库](https://github.com/wanghaibing07/retail-reliability-lab) · [项目概况](https://github.com/wanghaibing07/retail-reliability-lab/blob/main/docs/portfolio/plain-language-guide.md) · [架构图](https://github.com/wanghaibing07/retail-reliability-lab/blob/main/docs/portfolio/architecture.md)
 
-在三台 VMware 虚拟机上部署 AWS 的电商样例，练习日常运维中会遇到的部署、监控和恢复问题。业务代码来自 AWS；我做的是部署配置、脚本、排障和实验记录。
+基于 AWS Retail Store Sample App v1.6.2 搭建的三节点 Kubernetes 可靠性工程实验室。项目覆盖自动化部署、GitOps、监控告警、订单数据恢复、发布故障恢复和容量验证。业务应用采用上游样例；我负责部署与监控配置、自动化脚本、故障排查和验证记录。
 
 几份具体记录：
 
@@ -15,4 +15,4 @@
 - [发布失败演练](https://github.com/wanghaibing07/retail-reliability-lab/blob/main/docs/releases/stage6-closeout.md)：新实例因错误的就绪检查不能接流量，旧实例继续服务；撤销 Git 中的错误配置后恢复。
 - [性能测试](https://github.com/wanghaibing07/retail-reliability-lab/blob/main/docs/performance/stage7-closeout.md)：只读浏览负载下，30 RPS 持续 300 秒已验证健康；45 RPS 多次出现超时或延迟突增，后段恢复，最大容量还没有确定。
 
-部署和监控配置也在仓库中。这里记录的是本地实验结果，实际操作过程和限制都写在对应文档里。
+部署与监控配置、验证过程和已知限制都保存在仓库中。
