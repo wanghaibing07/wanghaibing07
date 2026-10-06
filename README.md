@@ -1,40 +1,18 @@
-<div align="center">
+# 小冰ovo
 
-![从能运行，到能被可靠运维](assets/profile-banner.svg)
+这里放我做过的 Linux 和 Kubernetes 运维实验、脚本和排障记录。目前在深圳找 Linux / 云平台运维相关岗位。
 
-**深圳求职 · Linux 运维 / 云平台运维方向**
+## Retail Reliability Lab
 
-用脚本减少重复操作，用证据判断系统状态，用演练验证恢复能力。
+[项目仓库](https://github.com/wanghaibing07/retail-reliability-lab) · [项目概况](https://github.com/wanghaibing07/retail-reliability-lab/blob/main/docs/portfolio/plain-language-guide.md) · [架构图](https://github.com/wanghaibing07/retail-reliability-lab/blob/main/docs/portfolio/architecture.md)
 
-[代表项目](https://github.com/wanghaibing07/retail-reliability-lab) · [中文速读](https://github.com/wanghaibing07/retail-reliability-lab/blob/main/docs/portfolio/plain-language-guide.md) · [架构与讲解](https://github.com/wanghaibing07/retail-reliability-lab/blob/main/docs/portfolio/architecture.md)
+在三台 VMware 虚拟机上部署 AWS 的电商样例，练习日常运维中会遇到的部署、监控和恢复问题。业务代码来自 AWS；我做的是部署配置、脚本、排障和实验记录。
 
-</div>
+几份具体记录：
 
-## 👋 关于我
+- [镜像拉取异常](https://github.com/wanghaibing07/retail-reliability-lab/blob/main/docs/incidents/001-image-pull-failure/README.md)：检查 DNS、HTTPS 和容器运行时，对比串行与并发下载，最后把镜像预拉取单独做成部署前的步骤。
+- [订单数据库恢复](https://github.com/wanghaibing07/retail-reliability-lab/blob/main/docs/backup/stage5-closeout.md)：恢复到隔离数据库，再由应用读回订单；迁移到持久存储后，重建 Pod 检查新旧订单是否还在。
+- [发布失败演练](https://github.com/wanghaibing07/retail-reliability-lab/blob/main/docs/releases/stage6-closeout.md)：新实例因错误的就绪检查不能接流量，旧实例继续服务；撤销 Git 中的错误配置后恢复。
+- [性能测试](https://github.com/wanghaibing07/retail-reliability-lab/blob/main/docs/performance/stage7-closeout.md)：只读浏览负载下，30 RPS 持续 300 秒已验证健康；45 RPS 多次出现超时或延迟突增，后段恢复，最大容量还没有确定。
 
-我是小冰ovo，正在通过实际部署、排障和恢复演练积累 Linux 与 Kubernetes 运维能力。我关注服务是否真的健康、故障影响如何控制，以及恢复结果能否验证。
-
-## 🔧 代表项目：Retail Reliability Lab
-
-基于 **AWS Retail Store Sample App** 搭建的三节点 Kubernetes 可靠性实验室。业务应用来自上游，我的工作集中在自动化交付、监控告警、数据恢复、发布安全与性能证据验证。
-
-| 我做了什么 | 验证了什么 |
-| --- | --- |
-| Shell 部署与检查脚本 | 两次完整销毁、部署、分层验证 |
-| GitHub Actions + Argo CD | 修改先自动检查，再部署；手工偏差自动纠正；资源清理设保护 |
-| Prometheus + Alertmanager | 受控告警从触发到恢复的邮件通知，以及发布停滞告警 |
-| Orders PostgreSQL 备份恢复 | 实际隔离恢复、应用读回订单、Pod 重建后数据保留 |
-| 受控发布失败演练 | 新实例不就绪时旧实例继续服务，通过撤销 Git 配置恢复 |
-| Artillery 性能实验 | 30 RPS / 300 秒健康；45 RPS 多轮阶段性退化，最大容量尚未确定 |
-
-**[查看项目与证据 →](https://github.com/wanghaibing07/retail-reliability-lab)**　[正式版本](https://github.com/wanghaibing07/retail-reliability-lab/releases/tag/stage7-v0.8)　[五个工程故事](https://github.com/wanghaibing07/retail-reliability-lab/blob/main/docs/portfolio/incident-stories.md)
-
-## 🧭 我的工程习惯
-
-- 先验证：运行中不等于已就绪，HTTP 200 也不等于所有层面健康。
-- 留证据：把改动、观测、恢复步骤和验证结果记录下来。
-- 有边界：相关性不等于根因，证据不足时不盲目调参。
-
-实际使用：**Linux · Shell · Git · Kubernetes · GitHub Actions · Argo CD · Prometheus · PostgreSQL · Artillery**。
-
-<sub>个人实验项目；不宣称生产级高可用、完整灾备或生产零停机。持续练习把做过的工作讲清楚。</sub>
+部署和监控配置也在仓库中。这里记录的是本地实验结果，实际操作过程和限制都写在对应文档里。
