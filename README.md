@@ -13,6 +13,6 @@
 - [镜像拉取异常](https://github.com/wanghaibing07/retail-reliability-lab/blob/main/docs/incidents/001-image-pull-failure/README.md)：检查 DNS、HTTPS 和容器运行时，对比串行与并发下载，最后把镜像预拉取单独做成部署前的步骤。
 - [订单数据库恢复](https://github.com/wanghaibing07/retail-reliability-lab/blob/main/docs/backup/stage5-closeout.md)：恢复到隔离数据库，再由应用读回订单；迁移到持久存储后，重建 Pod 检查新旧订单是否还在。
 - [发布失败演练](https://github.com/wanghaibing07/retail-reliability-lab/blob/main/docs/releases/stage6-closeout.md)：新实例因错误的就绪检查不能接流量，旧实例继续服务；撤销 Git 中的错误配置后恢复。
-- [性能测试](https://github.com/wanghaibing07/retail-reliability-lab/blob/main/docs/performance/stage7-closeout.md)：只读浏览负载下，30 RPS 持续 300 秒已验证健康；45 RPS 多次出现超时或延迟突增，后段恢复，最大容量还没有确定。
+- [性能测试](https://github.com/wanghaibing07/retail-reliability-lab/blob/main/docs/performance/stage7-closeout.md)：只读浏览负载下，39 RPS（13 VU/s）稳态验证全绿（33,750 次请求 100% 成功，p95 54~85ms）；42 RPS 精准复现饱和拐点，查明 catalog-mysql CPU 触顶（0.75 核）引发并发池耗尽与雪崩，成功锁定容量拐点。
 
 部署与监控配置、验证过程和已知限制都保存在仓库中。
